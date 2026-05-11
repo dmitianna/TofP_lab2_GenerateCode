@@ -1,6 +1,6 @@
-#include "classunit.h"
-#include "methodunit.h"
-#include "printoperatorunit.h"
+#include "CPPclassunit.h"
+#include "CPPmethodunit.h"
+#include "CPPprintoperatorunit.h"
 std::string generateProgram() {
     ClassUnit myClass( "MyClass" );
     myClass.add(

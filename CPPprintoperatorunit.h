@@ -1,5 +1,5 @@
-#ifndef PRINTOPERATORUNIT_H
-#define PRINTOPERATORUNIT_H
+#ifndef CPPPRINTOPERATORUNIT_H
+#define CPPPRINTOPERATORUNIT_H
 #include "unit.h"
 class PrintOperatorUnit : public Unit {
 public:
@@ -10,4 +10,4 @@ public:
 private:
     std::string m_text;
 };
-#endif // PRINTOPERATORUNIT_H
+#endif // CPPPRINTOPERATORUNIT_H

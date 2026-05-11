@@ -1,5 +1,5 @@
-#ifndef METHODUNIT_H
-#define METHODUNIT_H
+#ifndef CPPMETHODUNIT_H
+#define CPPMETHODUNIT_H
 #include "unit.h"
 #include <vector>
 class MethodUnit : public Unit {
@@ -41,4 +41,4 @@ private:
     Flags m_flags;
     std::vector< std::shared_ptr< Unit > > m_body;
 };
-#endif // METHODUNIT_H
+#endif // CPPMETHODUNIT_H

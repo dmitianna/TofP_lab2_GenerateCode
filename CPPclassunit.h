@@ -1,5 +1,5 @@
-#ifndef CLASSUNIT_H
-#define CLASSUNIT_H
+#ifndef CPPCLASSUNIT_H
+#define CPPCLASSUNIT_H
 #include "unit.h"
 #include <vector>
 class ClassUnit : public Unit
@@ -44,4 +44,4 @@ private:
     std::vector< Fields > m_fields;
 };
 const std::vector< std::string > ClassUnit::ACCESS_MODIFIERS = { "public","protected", "private" };
-#endif // CLASSUNIT_H
+#endif // CPPCLASSUNIT_H
