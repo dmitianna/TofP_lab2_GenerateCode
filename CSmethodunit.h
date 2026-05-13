@@ -8,7 +8,11 @@ public:
     enum Modifier {
         STATIC = 1,
         CONST = 1 << 1,
-        VIRTUAL = 1 << 2
+        VIRTUAL = 1 << 2,
+        SEALED = 1 << 3,
+        READONLY = 1 << 4,
+        ABSTRACT = 1 << 5,
+        EXTERN = 1 << 6
     };
 public:
     CSMethodUnit( const std::string& name, const std::string& returnType, Flags flags ) : MethodUnit(name, returnType, flags) { }
