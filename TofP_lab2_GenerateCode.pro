@@ -18,6 +18,9 @@ HEADERS += \
     CPPclassunit.h \
     CPPmethodunit.h \
     CPPprintoperatorunit.h \
+    CSclassunit.h \
+    CSmethodunit.h \
+    CSprintoperatorunit.h \
     classunit.h \
     methodunit.h \
     printoperatorunit.h \
