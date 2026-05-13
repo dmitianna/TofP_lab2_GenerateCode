@@ -1,6 +1,6 @@
 #ifndef CPPCLASSUNIT_H
 #define CPPCLASSUNIT_H
-#include "ClassUnit.h"
+#include "classunit.h"
 #include <vector>
 class CPPClassUnit : public ClassUnit
 {
@@ -8,7 +8,8 @@ public:
     explicit CPPClassUnit(const std::string &name) : ClassUnit(name)
     { }
 
-    void add( const std::shared_ptr< Unit >& unit, Flags flags ) {
+    void add( const std::shared_ptr< Unit >& unit, Flags flags ) override
+    {
         int accessModifier = PRIVATE;
         if( flags < ACCESS_MODIFIERS.size() ) {
             accessModifier = flags;
@@ -16,7 +17,7 @@ public:
         m_fields[ accessModifier ].push_back( unit );
     }
 
-    std::string compile( unsigned int level = 0 ) const
+    std::string compile( unsigned int level = 0 ) const override
     {
         std::string result = generateShift( level ) + "class " + m_name + " {\n";
         for( size_t i = 0; i < ACCESS_MODIFIERS.size(); ++i ) {
