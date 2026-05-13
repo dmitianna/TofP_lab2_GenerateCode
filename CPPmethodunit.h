@@ -1,8 +1,9 @@
 #ifndef CPPMETHODUNIT_H
 #define CPPMETHODUNIT_H
-#include "unit.h"
+#include "methodunit.h"
 #include <vector>
-class MethodUnit : public Unit {
+class CPPMethodUnit : public MethodUnit
+{
 public:
     enum Modifier {
         STATIC = 1,
@@ -10,9 +11,8 @@ public:
         VIRTUAL = 1 << 2
     };
 public:
-    MethodUnit( const std::string& name, const std::string& returnType, Flags
-                                                                           flags ) :
-        m_name( name ), m_returnType( returnType ), m_flags( flags ) { }
+    CPPMethodUnit( const std::string& name, const std::string& returnType, Flags flags ) : MethodUnit(name, returnType, flags) { }
+
     void add( const std::shared_ptr< Unit >& unit, Flags /* flags */ = 0 ) {
         m_body.push_back( unit );
     }
@@ -35,10 +35,5 @@ public:
         result += generateShift( level ) + "}\n";
         return result;
     }
-private:
-    std::string m_name;
-    std::string m_returnType;
-    Flags m_flags;
-    std::vector< std::shared_ptr< Unit > > m_body;
 };
 #endif // CPPMETHODUNIT_H
