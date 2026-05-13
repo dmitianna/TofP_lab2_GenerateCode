@@ -7,7 +7,7 @@ public:
     std::string compile( unsigned int level = 0 ) const {
         return generateShift( level ) + "printf( \"" + m_text + "\" );\n";
     }
-private:
+protected:
     std::string m_text;
 };
 #endif // PRINTOPERATORUNIT_H

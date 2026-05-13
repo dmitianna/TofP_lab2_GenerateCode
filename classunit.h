@@ -38,7 +38,7 @@ public:
         result += generateShift( level ) + "};\n";
         return result;
     }
-private:
+protected:
     std::string m_name;
     using Fields = std::vector< std::shared_ptr< Unit > >;
     std::vector< Fields > m_fields;
