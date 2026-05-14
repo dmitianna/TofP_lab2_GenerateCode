@@ -4,9 +4,9 @@
 class CSPrintOperatorUnit : public PrintOperatorUnit {
 public:
     explicit CSPrintOperatorUnit( const std::string& text ) : PrintOperatorUnit(text) { }
-    std::string compile( unsigned int level = 0 ) const override
-    {
-        return generateShift( level ) + "printf( \"" + m_text + "\" );\n";
+
+    std::string compile(unsigned int level = 0) const override {
+        return generateShift(level) + "Console.WriteLine(\"" + m_text + "\");\n";
     }
 };
 #endif // CSPRINTOPERATORUNIT_H
