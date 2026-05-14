@@ -1,10 +1,10 @@
 #ifndef JAVACLASSUNIT_H
 #define JAVACLASSUNIT_H
 #include "classunit.h"
-#include "JAVAmethodunit.h"
 #include <vector>
 class JAVAClassUnit : public ClassUnit
 {
+
 public:
     explicit JAVAClassUnit(const std::string &name) : ClassUnit(name)
     { }
@@ -25,13 +25,15 @@ public:
             if( m_fields[ i ].empty() ) {
                 continue;
             }
-            result += ACCESS_MODIFIERS[ i ] + ":\n";
             for( const auto& f : m_fields[ i ] ) {
-                result += f->compile( level + 1 );
+                result += generateShift(level + 1);
+
+                result += ACCESS_MODIFIERS[i] + " ";
+                result += f->compile(0);
             }
             result += "\n";
         }
-        result += generateShift( level ) + "};\n";
+        result += generateShift( level ) + "}\n";
         return result;
     }
 };
