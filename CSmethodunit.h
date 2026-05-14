@@ -19,6 +19,7 @@ public:
 
     void add( const std::shared_ptr< Unit >& unit, Flags /* flags */ = 0 ) override
     {
+        if(m_flags & ABSTRACT) return;
         m_body.push_back( unit );
     }
     std::string compile( unsigned int level = 0 ) const override
