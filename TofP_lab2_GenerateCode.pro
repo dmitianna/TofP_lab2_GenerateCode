@@ -22,6 +22,7 @@ HEADERS += \
     CSmethodunit.h \
     CSprintoperatorunit.h \
     classunit.h \
+    factories.h \
     methodunit.h \
     printoperatorunit.h \
     unit.h
