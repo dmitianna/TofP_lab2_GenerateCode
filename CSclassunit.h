@@ -36,7 +36,38 @@ public:
 
     std::string compile( unsigned int level = 0 ) const override
     {
-        return {};
+        std::string result = generateShift(level);
+        if (isAbstract) {
+            result += "abstract ";
+        }
+
+        result += "class " + m_name;
+        result += " {\n";
+
+        int accessModifiersSize = ACCESS_MODIFIERS.size() + CS_ACCESS_MODIFIERS.size();
+        for(size_t i = 0; i < accessModifiersSize; ++i) {
+            if(m_fields[i].empty()) {
+                continue;
+            }
+            for (const auto &field : m_fields[i]) {
+                std::string access_modifier;
+
+                if (i > ACCESS_MODIFIERS.size() - 1) {
+                    int custom_index = i - ACCESS_MODIFIERS.size();
+                    access_modifier = CS_ACCESS_MODIFIERS[custom_index];
+                } else {
+                    access_modifier = ACCESS_MODIFIERS[i];
+                }
+
+                result += access_modifier + ' ';
+
+                result += field->compile(level);
+            }
+
+            result += "\n";
+        }
+        result += generateShift(level) + "};\n";
+        return result;
     }
 
 private:
