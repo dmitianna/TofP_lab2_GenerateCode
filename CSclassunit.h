@@ -26,6 +26,12 @@ public:
         if(flags < (ACCESS_MODIFIERS.size() + CS_ACCESS_MODIFIERS.size())) {
             accessModifier = flags;
         }
+
+        auto method = std::dynamic_pointer_cast<CSMethodUnit>(unit);
+
+        if(method && (method->getFlags() & CSMethodUnit::ABSTRACT)) {
+            isAbstract = true;
+        }
         m_fields[accessModifier].push_back(unit);
     }
 
@@ -53,15 +59,13 @@ public:
                 } else {
                     access_modifier = ACCESS_MODIFIERS[i];
                 }
-
-                result += access_modifier + ' ';
-
-                result += field->compile(level);
+                std::string compiled = field->compile(level + 1);
+                compiled.insert(compiled.find_first_not_of(' '),access_modifier + " ");
+                result += compiled;
             }
-
             result += "\n";
         }
-        result += generateShift(level) + "};\n";
+        result += generateShift(level) + "}\n";
         return result;
     }
 

@@ -7,10 +7,8 @@ class CSMethodUnit : public MethodUnit
 public:
     enum Modifier {
         STATIC = 1,
-        CONST = 1 << 1,
         VIRTUAL = 1 << 2,
         SEALED = 1 << 3,
-        READONLY = 1 << 4,
         ABSTRACT = 1 << 5,
         EXTERN = 1 << 6
     };
@@ -37,11 +35,6 @@ public:
         if((m_flags & SEALED) && !(m_flags & ABSTRACT))
             result += "sealed ";
 
-        if(m_flags & READONLY)
-            result += "readonly ";
-        else if(m_flags & CONST)
-            result += "const ";
-
         result += m_returnType + ' ';
         result += m_name + "() ";
 
@@ -55,5 +48,7 @@ public:
 
         return result;
     }
+
+    Flags getFlags() const {return m_flags;}
 };
 #endif // CSMETHODUNIT_H
