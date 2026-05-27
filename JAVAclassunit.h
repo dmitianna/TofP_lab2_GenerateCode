@@ -26,10 +26,9 @@ public:
                 continue;
             }
             for( const auto& f : m_fields[ i ] ) {
-                result += generateShift(level + 1);
-
-                result += ACCESS_MODIFIERS[i] + " ";
-                result += f->compile(0);
+                std::string compiled = f->compile(level + 1);
+                compiled.insert(compiled.find_first_not_of(' '),ACCESS_MODIFIERS[i] + " ");
+                result += compiled;
             }
             result += "\n";
         }

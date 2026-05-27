@@ -6,11 +6,11 @@ class CSMethodUnit : public MethodUnit
 {
 public:
     enum Modifier {
-        STATIC = 1,
-        VIRTUAL = 1 << 2,
-        SEALED = 1 << 3,
-        ABSTRACT = 1 << 5,
-        EXTERN = 1 << 6
+        STATIC   = MethodUnit::STATIC,
+        VIRTUAL  = MethodUnit::VIRTUAL,
+        SEALED   = 1 << 3,
+        ABSTRACT = 1 << 4,
+        EXTERN   = 1 << 5
     };
 public:
     CSMethodUnit( const std::string& name, const std::string& returnType, Flags flags = 0) : MethodUnit(name, returnType, flags) { }
@@ -48,7 +48,5 @@ public:
 
         return result;
     }
-
-    Flags getFlags() const {return m_flags;}
 };
 #endif // CSMETHODUNIT_H

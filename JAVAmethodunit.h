@@ -6,9 +6,9 @@ class JAVAMethodUnit : public MethodUnit
 {
 public:
     enum Modifier {
-        STATIC = 1,
-        FINAL = 1 << 1,
-        ABSTRACT = 1 << 2
+        STATIC   = MethodUnit::STATIC,
+        FINAL    = 1 << 6,
+        ABSTRACT = 1 << 7
     };
 public:
     JAVAMethodUnit( const std::string& name, const std::string& returnType, Flags flags ) : MethodUnit(name, returnType, flags) { }

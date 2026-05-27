@@ -35,6 +35,7 @@ public:
         result += generateShift( level ) + "}\n";
         return result;
     }
+    Flags getFlags() const {return m_flags;}
 protected:
     std::string m_name;
     std::string m_returnType;
