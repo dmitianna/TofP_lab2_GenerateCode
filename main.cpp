@@ -1,30 +1,20 @@
-#include "CPPclassunit.h"
-#include "CPPmethodunit.h"
-#include "CPPprintoperatorunit.h"
-#include <assert.h>
-#include "CSclassunit.h"
-#include "CSmethodunit.h"
-#include "CSprintoperatorunit.h"
-std::string generateProgram() {
-    CPPClassUnit myClass( "MyClass" );
-    myClass.add(
-        std::make_shared< CPPMethodUnit >( "testFunc1", "void", 0 ),
-        CPPClassUnit::PUBLIC
-        );
-    myClass.add(
-        std::make_shared< CPPMethodUnit >( "testFunc2", "void", CPPMethodUnit::STATIC ),
-        CPPClassUnit::PRIVATE
-        );
-    myClass.add(
-        std::make_shared< CPPMethodUnit >( "testFunc3", "void", CPPMethodUnit::VIRTUAL |
-                                                              CPPMethodUnit::CONST ),
-        CPPClassUnit::PUBLIC
-        );
-    auto method = std::make_shared< CPPMethodUnit >( "testFunc4", "void",
-                                               CPPMethodUnit::STATIC );
-    method->add( std::make_shared< CPPPrintOperatorUnit >( R"(Hello, world!\n)" ) );
-    myClass.add( method, CPPClassUnit::PROTECTED );
-    return myClass.compile();
+#include "factories.h"
+
+std::string generateProgram(AbstractFactory& factory) {
+    auto myClass = factory.CreateClassUnit("MyClass");
+    myClass->add(factory.CreateMethodUnit("testFunc1", "void", 0),ClassUnit::PUBLIC);
+    myClass->add(
+        factory.CreateMethodUnit("testFunc2","void",MethodUnit::STATIC),ClassUnit::PRIVATE);
+
+    myClass->add(factory.CreateMethodUnit("testFunc3","void",
+            MethodUnit::VIRTUAL | MethodUnit::CONST), ClassUnit::PUBLIC);
+    auto method = factory.CreateMethodUnit("testFunc4","void",MethodUnit::STATIC);
+
+    method->add(factory.CreatePrintOperatorUnit(R"(Hello, world!\n)"));
+
+    myClass->add(method, ClassUnit::PROTECTED);
+
+    return myClass->compile();
 }
 
 void testCs() {
@@ -63,6 +53,11 @@ void testCs() {
 
 int main() {
     //std::cout << generateProgram() << std::endl;
-    testCs();
+    //testCs();
+
+    CppGeneratorFactory cppFactory;
+
+    std::cout << generateProgram(cppFactory)<< std::endl;
+
     return 0;
 }
