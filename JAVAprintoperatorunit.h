@@ -6,7 +6,7 @@ public:
     explicit JAVAPrintOperatorUnit( const std::string& text ) : PrintOperatorUnit(text) { }
     std::string compile( unsigned int level = 0 ) const override
     {
-        return generateShift( level ) + "printf( \"" + m_text + "\" );\n";
+        return generateShift( level ) + "System.out.println(\"" + m_text + "\");\n";
     }
 };
 #endif // JAVAPRINTOPERATORUNIT_H
