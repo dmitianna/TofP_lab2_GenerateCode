@@ -56,8 +56,9 @@ int main() {
     //testCs();
 
     CppGeneratorFactory cppFactory;
-
-    std::cout << generateProgram(cppFactory)<< std::endl;
+    CSGeneratorFactory csFactory;
+    JAVAGeneratorFactory javaFactory;
+    std::cout << generateProgram(csFactory)<< std::endl;
 
     return 0;
 }

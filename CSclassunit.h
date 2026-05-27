@@ -21,16 +21,11 @@ public:
 
     void add( const std::shared_ptr< Unit >& unit, Flags flags ) override
     {
-        if(!isAbstract & static_cast<bool>(CSMethodUnit::ABSTRACT)) {
-            isAbstract = true;
-        }
-
         int accessModifier = AccessModifier::PUBLIC;
 
         if(flags < (ACCESS_MODIFIERS.size() + CS_ACCESS_MODIFIERS.size())) {
             accessModifier = flags;
         }
-
         m_fields[accessModifier].push_back(unit);
     }
 
