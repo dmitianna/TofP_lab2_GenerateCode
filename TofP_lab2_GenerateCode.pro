@@ -21,6 +21,9 @@ HEADERS += \
     CSclassunit.h \
     CSmethodunit.h \
     CSprintoperatorunit.h \
+    JAVAclassunit.h \
+    JAVAmethodunit.h \
+    JAVAprintoperatorunit.h \
     classunit.h \
     factories.h \
     methodunit.h \

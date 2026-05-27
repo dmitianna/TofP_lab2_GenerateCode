@@ -11,6 +11,9 @@
 #include "CsMethodUnit.h"
 #include "CsClassUnit.h"
 
+#include "JAVAPrintOperatorUnit.h"
+#include "JAVAMethodUnit.h"
+#include "JAVAClassUnit.h"
 class AbstractFactory {
 public:
     virtual std::shared_ptr<ClassUnit> CreateClassUnit(const std::string& name) = 0;
@@ -41,6 +44,21 @@ public:
     }
     std::shared_ptr<PrintOperatorUnit> CreatePrintOperatorUnit(const std::string& text) override {
         return std::make_shared<CSPrintOperatorUnit>(text);
+    }
+};
+
+class JAVAGeneratorFactory : public AbstractFactory {
+public:
+    std::shared_ptr<ClassUnit> CreateClassUnit(const std::string& name) override {
+        return std::make_shared<JAVAClassUnit>(name);
+    }
+
+    std::shared_ptr<MethodUnit> CreateMethodUnit(const std::string& name,const std::string& returnType,Unit::Flags flags) override {
+        return std::make_shared<JAVAMethodUnit>(name,returnType,flags);
+    }
+
+    std::shared_ptr<PrintOperatorUnit> CreatePrintOperatorUnit(const std::string& text) override {
+        return std::make_shared<JAVAPrintOperatorUnit>(text);
     }
 };
 #endif // FACTORIES_H
