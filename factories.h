@@ -3,19 +3,20 @@
 
 #include <memory>
 
-#include "CPPPrintOperatorUnit.h"
-#include "CPPMethodUnit.h"
-#include "CPPClassUnit.h"
+#include "CPPprintOperatorUnit.h"
+#include "CPPmethodUnit.h"
+#include "CPPclassUnit.h"
 
-#include "CSPrintOperatorUnit.h"
-#include "CSMethodUnit.h"
-#include "CSClassUnit.h"
+#include "CSprintOperatorUnit.h"
+#include "CSmethodUnit.h"
+#include "CSclassUnit.h"
 
-#include "JAVAPrintOperatorUnit.h"
-#include "JAVAMethodUnit.h"
-#include "JAVAClassUnit.h"
+#include "JAVAprintOperatorUnit.h"
+#include "JAVAmethodUnit.h"
+#include "JAVAclassUnit.h"
 class AbstractFactory {
 public:
+    virtual ~AbstractFactory() = default;
     virtual std::shared_ptr<ClassUnit> CreateClassUnit(const std::string& name) = 0;
     virtual std::shared_ptr<MethodUnit> CreateMethodUnit(const std::string& name, const std::string& returnType, Unit::Flags flags) = 0;
     virtual std::shared_ptr<PrintOperatorUnit> CreatePrintOperatorUnit(const std::string& text) = 0;

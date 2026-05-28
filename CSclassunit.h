@@ -60,7 +60,10 @@ public:
                     access_modifier = ACCESS_MODIFIERS[i];
                 }
                 std::string compiled = field->compile(level + 1);
-                compiled.insert(compiled.find_first_not_of(' '),access_modifier + " ");
+                auto pos = compiled.find_first_not_of(' ');
+                if (pos != std::string::npos) {
+                    compiled.insert(pos, access_modifier + " ");
+                }
                 result += compiled;
             }
             result += "\n";
