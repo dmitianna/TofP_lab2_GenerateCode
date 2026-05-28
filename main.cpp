@@ -24,7 +24,7 @@ int main() {
     CppGeneratorFactory cppFactory;
     CSGeneratorFactory csFactory;
     JAVAGeneratorFactory javaFactory;
-    std::cout << generateProgram(javaFactory)<< std::endl;
+    std::cout << generateProgram(csFactory)<< std::endl;
 
     return 0;
 }

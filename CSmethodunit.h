@@ -38,7 +38,10 @@ public:
         result += m_returnType + ' ';
         result += m_name + "() ";
 
-
+        if((m_flags & ABSTRACT) || (m_flags & EXTERN)) {
+            result += ";\n";
+            return result;
+        }
         result += "{\n";
         for(auto it = m_body.begin(); it != m_body.end(); ++it) {
             result += (*it)->compile(level + 1);
