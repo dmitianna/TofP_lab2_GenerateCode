@@ -66,5 +66,9 @@ public:
 
         return result;
     }
+    bool isAbstract() const override
+    {
+        return m_flags & ABSTRACT;
+    }
 };
 #endif // CSMETHODUNIT_H

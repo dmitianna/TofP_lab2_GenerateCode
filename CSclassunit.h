@@ -1,7 +1,7 @@
 #ifndef CSCLASSUNIT_H
 #define CSCLASSUNIT_H
 #include "classunit.h"
-#include "CSmethodunit.h"
+#include "methodunit.h"
 #include <vector>
 class CSClassUnit : public ClassUnit
 {
@@ -27,9 +27,9 @@ public:
             accessModifier = flags;
         }
 
-        auto method = std::dynamic_pointer_cast<CSMethodUnit>(unit);
-
-        if(method && (method->getFlags() & CSMethodUnit::ABSTRACT)) {
+        auto method =std::dynamic_pointer_cast<MethodUnit>(unit);
+        if(method && method->isAbstract())
+        {
             isAbstract = true;
         }
         m_fields[accessModifier].push_back(unit);

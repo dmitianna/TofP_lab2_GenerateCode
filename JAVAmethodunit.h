@@ -63,5 +63,9 @@ public:
         result += generateShift( level ) + "}\n";
         return result;
     }
+    bool isAbstract() const override
+    {
+        return m_flags & ABSTRACT;
+    }
 };
 #endif // JAVAMETHODUNIT_H

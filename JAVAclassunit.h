@@ -1,7 +1,7 @@
 #ifndef JAVACLASSUNIT_H
 #define JAVACLASSUNIT_H
 #include "classunit.h"
-#include "JAVAmethodunit.h"
+#include "methodunit.h"
 #include <vector>
 class JAVAClassUnit : public ClassUnit
 {
@@ -15,12 +15,11 @@ public:
         if( flags < ACCESS_MODIFIERS.size() ) {
             accessModifier = flags;
         }
-        auto method = std::dynamic_pointer_cast<JAVAMethodUnit>(unit);
-
-        if(method && (method->getFlags() & JAVAMethodUnit::ABSTRACT)) {
+        auto method =std::dynamic_pointer_cast<MethodUnit>(unit);
+        if(method && method->isAbstract())
+        {
             isAbstract = true;
         }
-
         m_fields[ accessModifier ].push_back( unit );
     }
 

@@ -36,6 +36,10 @@ public:
         return result;
     }
     Flags getFlags() const {return m_flags;}
+    virtual bool isAbstract() const
+    {
+        return false;
+    }
 protected:
     std::string m_name;
     std::string m_returnType;
