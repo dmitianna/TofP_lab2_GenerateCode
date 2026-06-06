@@ -5,15 +5,6 @@
 #include <vector>
 class CSClassUnit : public ClassUnit
 {
-    enum CSAccesModifier : Flags {
-        PUBLIC = AccessModifier::PUBLIC,
-        PROTECTED = AccessModifier::PROTECTED,
-        PRIVATE = AccessModifier::PRIVATE,
-        PRIVATE_PROTECTED,
-        FILE,
-        INTERNAL,
-        PROTECTED_INTERNAL
-    };
     static const std::vector<std::string> CS_ACCESS_MODIFIERS;
 public:
     explicit CSClassUnit(const std::string &name) : ClassUnit(name)

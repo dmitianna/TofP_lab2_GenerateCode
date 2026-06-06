@@ -2,15 +2,10 @@
 #define CLASSUNIT_H
 #include "unit.h"
 #include <vector>
+#include "modifiers/accessmodifier.h"
 class ClassUnit : public Unit
 {
 public:
-    enum AccessModifier {
-        PUBLIC,
-        PROTECTED,
-        PRIVATE
-    };
-
     static const std::vector<std::string> ACCESS_MODIFIERS;
 public:
     explicit ClassUnit( const std::string& name ) : m_name( name ) {

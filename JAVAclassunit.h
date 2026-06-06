@@ -11,7 +11,7 @@ public:
 
     void add( const std::shared_ptr< Unit >& unit, Flags flags ) override
     {
-        size_t accessModifier = PRIVATE;
+        size_t accessModifier = AccessModifier::PRIVATE;
         if( flags < ACCESS_MODIFIERS.size() ) {
             accessModifier = flags;
         }
