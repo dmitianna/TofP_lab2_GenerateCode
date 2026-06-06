@@ -5,7 +5,7 @@
 class CPPClassUnit : public ClassUnit
 {
 public:
-    explicit CPPClassUnit(const std::string &name) : ClassUnit(name)
+    explicit CPPClassUnit(const std::string &name, Flags flags = 0) : ClassUnit(name, flags)
     { }
 
     void add( const std::shared_ptr< Unit >& unit, Flags flags ) override

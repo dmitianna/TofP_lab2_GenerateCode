@@ -6,7 +6,7 @@
 class JAVAClassUnit : public ClassUnit
 {
 public:
-    explicit JAVAClassUnit(const std::string &name) : ClassUnit(name)
+    explicit JAVAClassUnit(const std::string &name, Flags flags = 0) : ClassUnit(name, flags)
     { }
 
     void add( const std::shared_ptr< Unit >& unit, Flags flags ) override

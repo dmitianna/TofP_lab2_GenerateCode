@@ -7,7 +7,7 @@ class CSClassUnit : public ClassUnit
 {
     static const std::vector<std::string> CS_ACCESS_MODIFIERS;
 public:
-    explicit CSClassUnit(const std::string &name) : ClassUnit(name)
+    explicit CSClassUnit(const std::string &name, Flags flags = 0) : ClassUnit(name, flags)
     {  m_fields.resize(ACCESS_MODIFIERS.size() + CS_ACCESS_MODIFIERS.size());}
 
     void add( const std::shared_ptr< Unit >& unit, Flags flags ) override

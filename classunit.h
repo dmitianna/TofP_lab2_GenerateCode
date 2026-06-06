@@ -3,12 +3,13 @@
 #include "unit.h"
 #include <vector>
 #include "modifiers/accessmodifier.h"
+#include "modifiers/classmodifier.h"
 class ClassUnit : public Unit
 {
 public:
     static const std::vector<std::string> ACCESS_MODIFIERS;
 public:
-    explicit ClassUnit( const std::string& name ) : m_name( name ) {
+    explicit ClassUnit( const std::string& name,Flags flags = 0 ) : m_name(name), m_flags(flags) {
         m_fields.resize(ACCESS_MODIFIERS.size());
     }
 
@@ -18,6 +19,7 @@ protected:
     std::string m_name;
     using Fields = std::vector< std::shared_ptr< Unit > >;
     std::vector< Fields > m_fields;
+    Flags m_flags;
 };
 const std::vector<std::string> ClassUnit::ACCESS_MODIFIERS = {"public", "protected", "private"};
 #endif // CLASSUNIT_H
