@@ -1,7 +1,6 @@
 #ifndef JAVACLASSUNIT_H
 #define JAVACLASSUNIT_H
 #include "classunit.h"
-#include "methodunit.h"
 #include <vector>
 class JAVAClassUnit : public ClassUnit
 {
@@ -15,18 +14,14 @@ public:
         if( flags < ACCESS_MODIFIERS.size() ) {
             accessModifier = flags;
         }
-        auto method =std::dynamic_pointer_cast<MethodUnit>(unit);
-        if(method && method->isAbstract())
-        {
-            isAbstract = true;
-        }
         m_fields[ accessModifier ].push_back( unit );
     }
 
     std::string compile( unsigned int level = 0 ) const override
     {
         std::string result = generateShift(level);
-        if(isAbstract) {
+        if(m_flags & ClassModifier::ABSTRACT_CLASS)
+        {
             result += "abstract ";
         }
         result += "class " + m_name + " {\n";
@@ -47,8 +42,6 @@ public:
         result += generateShift( level ) + "}\n";
         return result;
     }
-private:
-    bool isAbstract = false;
 };
 
 #endif // JAVACLASSUNIT_H

@@ -10,10 +10,6 @@ public:
     virtual void add( const std::shared_ptr< Unit >& unit, Flags /* flags */ = 0 ) override = 0;
     virtual std::string compile( unsigned int level = 0 ) const override = 0;
     Flags getFlags() const {return m_flags;}
-    virtual bool isAbstract() const
-    {
-        return false;
-    }
 protected:
     std::string m_name;
     std::string m_returnType;

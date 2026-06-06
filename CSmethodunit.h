@@ -58,9 +58,5 @@ public:
 
         return result;
     }
-    bool isAbstract() const override
-    {
-        return m_flags & MethodModifier::ABSTRACT;
-    }
 };
 #endif // CSMETHODUNIT_H

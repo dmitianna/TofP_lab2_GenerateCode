@@ -1,7 +1,6 @@
 #ifndef CSCLASSUNIT_H
 #define CSCLASSUNIT_H
 #include "classunit.h"
-#include "methodunit.h"
 #include <vector>
 class CSClassUnit : public ClassUnit
 {
@@ -17,25 +16,18 @@ public:
         if(flags < (ACCESS_MODIFIERS.size() + CS_ACCESS_MODIFIERS.size())) {
             accessModifier = flags;
         }
-
-        auto method =std::dynamic_pointer_cast<MethodUnit>(unit);
-        if(method && method->isAbstract())
-        {
-            isAbstract = true;
-        }
         m_fields[accessModifier].push_back(unit);
     }
 
     std::string compile( unsigned int level = 0 ) const override
     {
         std::string result = generateShift(level);
-        if (isAbstract) {
+        if(m_flags & ClassModifier::ABSTRACT_CLASS)
+        {
             result += "abstract ";
         }
-
         result += "class " + m_name;
         result += " {\n";
-
         size_t accessModifiersSize = ACCESS_MODIFIERS.size() + CS_ACCESS_MODIFIERS.size();
         for(size_t i = 0; i < accessModifiersSize; ++i) {
             if(m_fields[i].empty()) {
@@ -62,9 +54,6 @@ public:
         result += generateShift(level) + "}\n";
         return result;
     }
-
-private:
-    bool isAbstract = false;
 };
 inline const std::vector<std::string> CSClassUnit::CS_ACCESS_MODIFIERS = {"private protected", "file", "internal", "protected internal"};
 #endif // CSCLASSUNIT_H
