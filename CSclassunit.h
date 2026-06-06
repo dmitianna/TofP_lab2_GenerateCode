@@ -75,5 +75,5 @@ public:
 private:
     bool isAbstract = false;
 };
-const std::vector<std::string> CSClassUnit::CS_ACCESS_MODIFIERS = {"private protected", "file", "internal", "protected internal"};
+inline const std::vector<std::string> CSClassUnit::CS_ACCESS_MODIFIERS = {"private protected", "file", "internal", "protected internal"};
 #endif // CSCLASSUNIT_H
