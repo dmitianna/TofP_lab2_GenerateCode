@@ -3,17 +3,17 @@
 
 #include <memory>
 
-#include "CPPprintOperatorUnit.h"
-#include "CPPmethodUnit.h"
-#include "CPPclassUnit.h"
+#include "CPPprintoperatorUnit.h"
+#include "CPPmethodunit.h"
+#include "CPPclassunit.h"
 
-#include "CSprintOperatorUnit.h"
-#include "CSmethodUnit.h"
-#include "CSclassUnit.h"
+#include "CSprintoperatorunit.h"
+#include "CSmethodunit.h"
+#include "CSclassunit.h"
 
-#include "JAVAprintOperatorUnit.h"
-#include "JAVAmethodUnit.h"
-#include "JAVAclassUnit.h"
+#include "JAVAprintoperatorunit.h"
+#include "JAVAmethodunit.h"
+#include "JAVAclassunit.h"
 class AbstractFactory {
 public:
     virtual ~AbstractFactory() = default;

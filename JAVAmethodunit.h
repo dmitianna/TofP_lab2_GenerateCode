@@ -7,6 +7,8 @@ class JAVAMethodUnit : public MethodUnit
 public:
     enum Modifier {
         STATIC   = MethodUnit::STATIC,
+        CONST    = MethodUnit::CONST,
+        VIRTUAL  = MethodUnit::VIRTUAL,
         FINAL    = 1 << 6,
         ABSTRACT = 1 << 7
     };
@@ -28,6 +30,17 @@ public:
             throw std::runtime_error("Java method cannot be both abstract and static");
         }
 
+        if(m_flags & VIRTUAL) {
+            throw std::runtime_error("Java does not support virtual methods");
+        }
+
+        if(m_flags & CONST) {
+            throw std::runtime_error("Java does not support const methods");
+        }
+
+        if((m_flags & ABSTRACT) && !m_body.empty()) {
+            throw std::runtime_error("Abstract Java method cannot have body");
+        }
         std::string result = generateShift( level );
         if(m_flags & ABSTRACT)
             result += "abstract ";

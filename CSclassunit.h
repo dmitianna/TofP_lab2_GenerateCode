@@ -1,7 +1,7 @@
 #ifndef CSCLASSUNIT_H
 #define CSCLASSUNIT_H
 #include "classunit.h"
-#include "CsMethodUnit.h"
+#include "CSmethodunit.h"
 #include <vector>
 class CSClassUnit : public ClassUnit
 {
@@ -45,7 +45,7 @@ public:
         result += "class " + m_name;
         result += " {\n";
 
-        int accessModifiersSize = ACCESS_MODIFIERS.size() + CS_ACCESS_MODIFIERS.size();
+        size_t accessModifiersSize = ACCESS_MODIFIERS.size() + CS_ACCESS_MODIFIERS.size();
         for(size_t i = 0; i < accessModifiersSize; ++i) {
             if(m_fields[i].empty()) {
                 continue;

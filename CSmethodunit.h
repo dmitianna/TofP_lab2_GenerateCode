@@ -22,6 +22,18 @@ public:
     }
     std::string compile( unsigned int level = 0 ) const override
     {
+        if((m_flags & ABSTRACT) && (m_flags & STATIC)) {
+            throw std::runtime_error("C# method cannot be both abstract and static");
+        }
+
+        if((m_flags & ABSTRACT) && (m_flags & SEALED)) {
+            throw std::runtime_error("C# method cannot be both abstract and sealed");
+        }
+
+        if((m_flags & VIRTUAL) && (m_flags & STATIC)) {
+            throw std::runtime_error("C# method cannot be both virtual and static");
+        }
+
         std::string result = generateShift(level);
 
         if(m_flags & ABSTRACT)
