@@ -31,5 +31,8 @@ public:
         result += generateShift( level ) + "}\n";
         return result;
     }
+    void validate() const override
+    {
+    }
 };
 #endif // CPPMETHODUNIT_H

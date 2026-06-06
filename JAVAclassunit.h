@@ -1,6 +1,7 @@
 #ifndef JAVACLASSUNIT_H
 #define JAVACLASSUNIT_H
 #include "classunit.h"
+#include "methodunit.h"
 #include <vector>
 class JAVAClassUnit : public ClassUnit
 {
@@ -19,6 +20,7 @@ public:
 
     std::string compile( unsigned int level = 0 ) const override
     {
+        validate();
         std::string result = generateShift(level);
         if(m_flags & ClassModifier::ABSTRACT_CLASS)
         {
@@ -41,6 +43,34 @@ public:
         }
         result += generateShift( level ) + "}\n";
         return result;
+    }
+
+    void validate() const override
+    {
+        bool hasAbstractMethods = false;
+
+        for(const auto& group : m_fields)
+        {
+            for(const auto& field : group)
+            {
+                field->validate();
+                auto method =std::dynamic_pointer_cast<MethodUnit>(field);
+                if(method &&(method->getFlags() & MethodModifier::ABSTRACT))
+                {
+                    hasAbstractMethods = true;
+                }
+            }
+        }
+
+        if(hasAbstractMethods && !(m_flags & ClassModifier::ABSTRACT_CLASS))
+        {
+            throw std::runtime_error("Class containing abstract methods must be abstract");
+        }
+
+        if((m_flags & ClassModifier::ABSTRACT_CLASS) && (m_flags & ClassModifier::FINAL_CLASS))
+        {
+            throw std::runtime_error("Java class cannot be both abstract and final");
+        }
     }
 };
 
