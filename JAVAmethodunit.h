@@ -7,8 +7,6 @@ class JAVAMethodUnit : public MethodUnit
 public:
     enum Modifier {
         STATIC   = MethodUnit::STATIC,
-        CONST    = MethodUnit::CONST,
-        VIRTUAL  = MethodUnit::VIRTUAL,
         FINAL    = 1 << 6,
         ABSTRACT = 1 << 7
     };

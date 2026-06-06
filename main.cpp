@@ -26,7 +26,7 @@ int main() {
     JAVAGeneratorFactory javaFactory;
     std::cout << generateProgram(cppFactory) << std::endl;
     std::cout << generateProgram(csFactory) << std::endl;
-    std::cout << generateProgram(javaFactory) << std::endl;
+    //std::cout << generateProgram(javaFactory) << std::endl;
 
     return 0;
 }

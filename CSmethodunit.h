@@ -39,6 +39,9 @@ public:
         if(m_flags & ABSTRACT)
             result += "abstract ";
 
+        if(m_flags & EXTERN)
+            result += "extern ";
+
         if((m_flags & STATIC) && !(m_flags & ABSTRACT))
             result += "static ";
         else if(m_flags & VIRTUAL)
