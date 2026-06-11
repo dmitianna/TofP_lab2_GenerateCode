@@ -28,4 +28,7 @@ HEADERS += \
     factories.h \
     methodunit.h \
     printoperatorunit.h \
-    unit.h
+    unit.h \
+    modifiers/accessmodifier.h \
+    modifiers/methodmodifier.h \
+    modifiers/classmodifier.h \

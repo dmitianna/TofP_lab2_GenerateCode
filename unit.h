@@ -11,8 +11,8 @@ public:
     virtual void add( const std::shared_ptr< Unit >& , Flags ) {
         throw std::runtime_error( "Not supported" );
     }
-    virtual std::string compile( unsigned int level = 0 ) const =
-        0;
+    virtual std::string compile( unsigned int level = 0 ) const = 0;
+    virtual void validate() const {}
 protected:
     virtual std::string generateShift( unsigned int level ) const
     {

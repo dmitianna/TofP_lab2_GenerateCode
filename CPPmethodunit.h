@@ -5,12 +5,6 @@
 class CPPMethodUnit : public MethodUnit
 {
 public:
-    enum Modifier {
-        STATIC = 1,
-        CONST = 1 << 1,
-        VIRTUAL = 1 << 2
-    };
-public:
     CPPMethodUnit( const std::string& name, const std::string& returnType, Flags flags ) : MethodUnit(name, returnType, flags) { }
 
     void add( const std::shared_ptr< Unit >& unit, Flags /* flags */ = 0 ) override
@@ -20,14 +14,14 @@ public:
     std::string compile( unsigned int level = 0 ) const override
     {
         std::string result = generateShift( level );
-        if( m_flags & STATIC ) {
+        if( m_flags & MethodModifier::STATIC ) {
             result += "static ";
-        } else if( m_flags & VIRTUAL ) {
+        } else if( m_flags & MethodModifier::VIRTUAL ) {
             result += "virtual ";
         }
         result += m_returnType + " ";
         result += m_name + "()";
-        if( m_flags & CONST ) {
+        if( m_flags & MethodModifier::CONST ) {
             result += " const";
         }
         result += " {\n";
@@ -36,6 +30,9 @@ public:
         }
         result += generateShift( level ) + "}\n";
         return result;
+    }
+    void validate() const override
+    {
     }
 };
 #endif // CPPMETHODUNIT_H

@@ -17,15 +17,15 @@
 class AbstractFactory {
 public:
     virtual ~AbstractFactory() = default;
-    virtual std::shared_ptr<ClassUnit> CreateClassUnit(const std::string& name) = 0;
+    virtual std::shared_ptr<ClassUnit> CreateClassUnit(const std::string& name, Unit::Flags flags = 0) = 0;
     virtual std::shared_ptr<MethodUnit> CreateMethodUnit(const std::string& name, const std::string& returnType, Unit::Flags flags) = 0;
     virtual std::shared_ptr<PrintOperatorUnit> CreatePrintOperatorUnit(const std::string& text) = 0;
 };
 
 class CppGeneratorFactory : public AbstractFactory {
 public:
-    std::shared_ptr<ClassUnit> CreateClassUnit(const std::string& name) override {
-        return std::make_shared<CPPClassUnit>(name);
+    std::shared_ptr<ClassUnit> CreateClassUnit(const std::string& name, Unit::Flags flags = 0) override {
+        return std::make_shared<CPPClassUnit>(name,flags);
     }
     std::shared_ptr<MethodUnit> CreateMethodUnit(const std::string& name, const std::string& returnType, Unit::Flags flags) override {
         return std::make_shared<CPPMethodUnit>(name, returnType, flags);
@@ -37,8 +37,8 @@ public:
 
 class CSGeneratorFactory : public AbstractFactory {
 public:
-    std::shared_ptr<ClassUnit> CreateClassUnit(const std::string& name) override {
-        return std::make_shared<CSClassUnit>(name);
+    std::shared_ptr<ClassUnit> CreateClassUnit(const std::string& name, Unit::Flags flags = 0) override {
+        return std::make_shared<CSClassUnit>(name,flags);
     }
     std::shared_ptr<MethodUnit> CreateMethodUnit(const std::string& name, const std::string& returnType, Unit::Flags flags) override {
         return std::make_shared<CSMethodUnit>(name, returnType, flags);
@@ -50,8 +50,8 @@ public:
 
 class JAVAGeneratorFactory : public AbstractFactory {
 public:
-    std::shared_ptr<ClassUnit> CreateClassUnit(const std::string& name) override {
-        return std::make_shared<JAVAClassUnit>(name);
+    std::shared_ptr<ClassUnit> CreateClassUnit(const std::string& name, Unit::Flags flags = 0) override {
+        return std::make_shared<JAVAClassUnit>(name,flags);
     }
 
     std::shared_ptr<MethodUnit> CreateMethodUnit(const std::string& name,const std::string& returnType,Unit::Flags flags) override {
