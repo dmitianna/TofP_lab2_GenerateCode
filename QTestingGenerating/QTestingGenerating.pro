@@ -9,6 +9,9 @@ CONFIG -= app_bundle
 SOURCES += \
         main.cpp
 
+INCLUDEPATH += ..
+INCLUDEPATH += ../modifiers
+
 HEADERS += \
     ../CPPclassunit.h \
     ../CPPmethodunit.h \
@@ -23,7 +26,10 @@ HEADERS += \
     ../factories.h \
     ../methodunit.h \
     ../printoperatorunit.h \
-    ../unit.h
+    ../unit.h \
+    ../modifiers/accessmodifier.h \
+    ../modifiers/methodmodifier.h \
+    ../modifiers/classmodifier.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
