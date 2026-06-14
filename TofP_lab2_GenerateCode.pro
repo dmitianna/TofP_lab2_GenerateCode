@@ -13,3 +13,22 @@ SOURCES += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+HEADERS += \
+    CPPclassunit.h \
+    CPPmethodunit.h \
+    CPPprintoperatorunit.h \
+    CSclassunit.h \
+    CSmethodunit.h \
+    CSprintoperatorunit.h \
+    JAVAclassunit.h \
+    JAVAmethodunit.h \
+    JAVAprintoperatorunit.h \
+    classunit.h \
+    factories.h \
+    methodunit.h \
+    printoperatorunit.h \
+    unit.h \
+    modifiers/accessmodifier.h \
+    modifiers/methodmodifier.h \
+    modifiers/classmodifier.h \

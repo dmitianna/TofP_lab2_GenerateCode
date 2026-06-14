@@ -1,19 +1,32 @@
-#include <QCoreApplication>
+#include "factories.h"
 
-int main(int argc, char *argv[])
-{
-    QCoreApplication a(argc, argv);
+std::string generateProgram(AbstractFactory& factory) {
+    auto myClass = factory.CreateClassUnit("MyClass");
+    myClass->add(factory.CreateMethodUnit("testFunc1", "void", 0),AccessModifier::PUBLIC);
+    myClass->add(
+        factory.CreateMethodUnit("testFunc2","void",MethodModifier::STATIC),AccessModifier::PRIVATE);
 
-    // Set up code that uses the Qt event loop here.
-    // Call a.quit() or a.exit() to quit the application.
-    // A not very useful example would be including
-    // #include <QTimer>
-    // near the top of the file and calling
-    // QTimer::singleShot(5000, &a, &QCoreApplication::quit);
-    // which quits the application after 5 seconds.
+    myClass->add(factory.CreateMethodUnit("testFunc3","void",
+           MethodModifier::VIRTUAL | MethodModifier::CONST), AccessModifier::PUBLIC);
+    auto method = factory.CreateMethodUnit("testFunc4","void",MethodModifier::STATIC);
 
-    // If you do not need a running Qt event loop, remove the call
-    // to a.exec() or use the Non-Qt Plain C++ Application template.
+    method->add(factory.CreatePrintOperatorUnit(R"(Hello, world!\n)"));
 
-    return a.exec();
+    myClass->add(method, AccessModifier::PROTECTED);
+
+    return myClass->compile();
+}
+
+int main() {
+    //std::cout << generateProgram() << std::endl;
+    //testCs();
+
+    CppGeneratorFactory cppFactory;
+    CSGeneratorFactory csFactory;
+    JAVAGeneratorFactory javaFactory;
+    std::cout << generateProgram(cppFactory) << std::endl;
+    std::cout << generateProgram(csFactory) << std::endl;
+    //std::cout << generateProgram(javaFactory) << std::endl;
+
+    return 0;
 }

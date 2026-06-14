@@ -1,0 +1,89 @@
+#ifndef CSCLASSUNIT_H
+#define CSCLASSUNIT_H
+#include "classunit.h"
+#include "methodunit.h"
+#include <vector>
+class CSClassUnit : public ClassUnit
+{
+    static const std::vector<std::string> CS_ACCESS_MODIFIERS;
+public:
+    explicit CSClassUnit(const std::string &name, Flags flags = 0) : ClassUnit(name, flags)
+    {  m_fields.resize(ACCESS_MODIFIERS.size() + CS_ACCESS_MODIFIERS.size());}
+
+    void add( const std::shared_ptr< Unit >& unit, Flags flags ) override
+    {
+        size_t accessModifier = AccessModifier::PUBLIC;
+
+        if(flags < (ACCESS_MODIFIERS.size() + CS_ACCESS_MODIFIERS.size())) {
+            accessModifier = flags;
+        }
+        m_fields[accessModifier].push_back(unit);
+    }
+
+    std::string compile( unsigned int level = 0 ) const override
+    {
+        validate();
+        std::string result = generateShift(level);
+        if(m_flags & ClassModifier::ABSTRACT_CLASS)
+        {
+            result += "abstract ";
+        }
+        result += "class " + m_name;
+        result += " {\n";
+        size_t accessModifiersSize = ACCESS_MODIFIERS.size() + CS_ACCESS_MODIFIERS.size();
+        for(size_t i = 0; i < accessModifiersSize; ++i) {
+            if(m_fields[i].empty()) {
+                continue;
+            }
+            for (const auto &field : m_fields[i]) {
+                std::string access_modifier;
+
+                if (i > ACCESS_MODIFIERS.size() - 1) {
+                    int custom_index = i - ACCESS_MODIFIERS.size();
+                    access_modifier = CS_ACCESS_MODIFIERS[custom_index];
+                } else {
+                    access_modifier = ACCESS_MODIFIERS[i];
+                }
+                std::string compiled = field->compile(level + 1);
+                auto pos = compiled.find_first_not_of(' ');
+                if (pos != std::string::npos) {
+                    compiled.insert(pos, access_modifier + " ");
+                }
+                result += compiled;
+            }
+            result += "\n";
+        }
+        result += generateShift(level) + "}\n";
+        return result;
+    }
+
+    void validate() const override
+    {
+        bool hasAbstractMethods = false;
+
+        for(const auto& group : m_fields)
+        {
+            for(const auto& field : group)
+            {
+                field->validate();
+                auto method = std::dynamic_pointer_cast<MethodUnit>(field);
+                if(method && (method->getFlags() & MethodModifier::ABSTRACT))
+                {
+                    hasAbstractMethods = true;
+                }
+            }
+        }
+
+        if(hasAbstractMethods && !(m_flags & ClassModifier::ABSTRACT_CLASS))
+        {
+            throw std::runtime_error("Class containing abstract methods must be abstract");
+        }
+
+        if((m_flags & ClassModifier::ABSTRACT_CLASS) && (m_flags & ClassModifier::SEALED_CLASS))
+        {
+            throw std::runtime_error( "C# class cannot be both abstract and sealed");
+        }
+    }
+};
+inline const std::vector<std::string> CSClassUnit::CS_ACCESS_MODIFIERS = {"private protected", "file", "internal", "protected internal"};
+#endif // CSCLASSUNIT_H
